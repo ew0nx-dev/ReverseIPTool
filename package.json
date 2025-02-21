@@ -5,6 +5,6 @@
     "https": "^1.0.0"
   },
   "scripts": {
-    "start": "node reverse.js"
+    "start": "node app.js"
   }
 }
