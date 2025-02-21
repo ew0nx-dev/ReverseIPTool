@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device=device-width, initial-scale=1.0">
+    <title>Reverse IP Aracı - ViewDNS PRO</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Reverse IP Aracı - ViewDNS.info PRO Versiyon</h1>
+            <p>Girdiğiniz IP veya domain için aynı sunucuda barındırılan diğer domainleri sorgulayın.</p>
+        </div>
+        
+        <div class="search-box">
+            <form action="/lookup" method="POST" onsubmit="showLoading()">
+                <div class="input-wrapper">
+                    <input type="text" 
+                        name="domain" 
+                        id="domainInput" 
+                        class="search-input" 
+                        placeholder="Domain veya IP girin (örn: example.com)"
+                        required>
+                </div>
+                <div class="input-wrapper">
+                    <input type="text" 
+                        name="apikey" 
+                        id="apikeyInput" 
+                        class="search-input" 
+                        placeholder="API Key (ViewDNS)"
+                        required>
+                </div>
+                <button type="submit" class="search-button">Sorgula</button>
+            </form>
+            
+            <% if (typeof error !== 'undefined' && error) { %>
+                <div class="error"><%= error %></div>
+            <% } %>
+        </div>
+
+        <div class="loading" id="loading">
+            <div class="loading-spinner"></div>
+            <p>Sorgulanıyor...</p>
+        </div>
+
+        <% if (typeof domains !== 'undefined' && domains.length > 0) { %>
+            <div class="results">
+                <div class="results-header">Sonuçlar</div>
+                <ul class="domain-list">
+                    <% domains.forEach(function(domain) { %>
+                        <li><%= domain %></li>
+                    <% }); %>
+                </ul>
+            </div>
+        <% } else if (typeof domains !== 'undefined' && domains.length === 0 && error) { %>
+            <div class="results">
+                <p style="color: #8b949e; text-align: center;">Sonuç bulunamadı.</p>
+            </div>
+        <% } %>
+    </div>
+
+    <script>
+        document.getElementById('domainInput').addEventListener('input', function(e) {
+            this.value = this.value.replace(/^https?:\/\//i, '').replace(/^www\./i, '');
+        });
+
+        function showLoading() {
+            document.getElementById("loading").style.display = "block";
+        }
+    </script>
+</body>
+</html>
