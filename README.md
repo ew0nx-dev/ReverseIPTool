@@ -17,6 +17,11 @@ Bu araç, ViewDNS API'si kullanarak bir IP adresine ait domain'leri sorgulamanı
 
 - ViewDNS API anahtarı
 
+## Kurulum
+
+1. npm install
+2. npm start
+
 ## Ekran Görüntüleri
 
 ![Aracın Ekran Görüntüsü](https://github.com/user-attachments/assets/2b43e116-e065-4116-8df2-1922b1312948)
